@@ -14,26 +14,26 @@
 #'
 #' @author Ignasi Bartomeus \email{nacho.bartomeus@@gmail.com}
 #' @examples \dontrun{
-#' getMetaData(41, 5, "aznalcollar")
 #' provincia <- c(41,11)
 #' estacion <- c(5,1)
 #' nombre_estacion <- c("Aznalcollar", "Basulta")
-#' getAllMetaData(provincia, estacion, nombre_estacion)
+#' getMetaData(provincia, estacion, nombre_estacion)
+#' getOneMetaData(41, 5, "aznalcollar")
 #' }
-getAllMetaData <- function(provincia = NA, estacion = NA, nombre_estacion = NA){
+getMetaData <- function(provincia = NA, estacion = NA, nombre_estacion = NA){
   if(length(provincia) < 2){
-    dat <- getMetaData(provincia, estacion, nombre_estacion)
+    dat <- getOneMetaData(provincia, estacion, nombre_estacion)
   } else{
-    dat <- getMetaData(provincia[1], estacion[1], nombre_estacion[1])
+    dat <- getOneMetaData(provincia[1], estacion[1], nombre_estacion[1])
     for(i in 2:length(provincia)){
-      temp <- getMetaData(provincia[i], estacion[i], nombre_estacion[i])
+      temp <- getOneMetaData(provincia[i], estacion[i], nombre_estacion[i])
       dat <- rbind(dat, temp)
     }
   }
   dat
 }
 
-getMetaData <- function(provincia = NA, estacion = NA, nombre_estacion = NA){
+getOneMetaData <- function(provincia = NA, estacion = NA, nombre_estacion = NA){
   require(httr)
   require(xml2)
   url = "https://www.juntadeandalucia.es/agriculturaypesca/ifapa/ria/servlet/FrontController?action=Static&url=coordenadas.jsp"
