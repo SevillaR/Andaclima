@@ -22,7 +22,7 @@
 #' }
 getAllMetaData <- function(provincia = NA, estacion = NA, nombre_estacion = NA){
   if(length(provincia) < 2){
-    message("use getMetaData() for a single station")
+    dat <- getMetaData(provincia, estacion, nombre_estacion)
   } else{
     dat <- getMetaData(provincia[1], estacion[1], nombre_estacion[1])
     for(i in 2:length(provincia)){
@@ -33,7 +33,6 @@ getAllMetaData <- function(provincia = NA, estacion = NA, nombre_estacion = NA){
   dat
 }
 
-#' @export
 getMetaData <- function(provincia = NA, estacion = NA, nombre_estacion = NA){
   require(httr)
   require(xml2)
