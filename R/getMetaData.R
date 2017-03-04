@@ -6,18 +6,35 @@
 #'
 #' @return
 #' @export
-#' 
+#'
 #' @description This function retrives the metadata of the targeted meteorological station.
-#' 
+#'
 #' See \url{https://www.juntadeandalucia.es/agriculturaypesca/ifapa/ria/servlet/FrontController?action=Init} for explanation of the
 #' data and codes.
 #'
 #' @author Ignasi Bartomeus \email{nacho.bartomeus@@gmail.com}
 #' @examples \dontrun{
 #' getMetaData(41, 5, "aznalcollar")
+#' provincia <- c(41,11)
+#' estacion <- c(5,1)
+#' nombre_estacion <- c("Aznalcollar", "Basulta")
+#' getAllMetaData(provincia, estacion, nombre_estacion)
 #' }
+getAllMetaData <- function(provincia = NA, estacion = NA, nombre_estacion = NA){
+  if(length(provincia) < 2){
+    message("use getMetaData() for a single station")
+  } else{
+    dat <- getMetaData(provincia[1], estacion[1], nombre_estacion[1])
+    for(i in 2:length(provincia)){
+      temp <- getMetaData(provincia[i], estacion[i], nombre_estacion[i])
+      dat <- rbind(dat, temp)
+    }
+  }
+  dat
+}
 
-getMetaData <- function(provincia = 41, estacion = 5, nombre_estacion = NA){
+#' @export
+getMetaData <- function(provincia = NA, estacion = NA, nombre_estacion = NA){
   require(httr)
   require(xml2)
   url = "https://www.juntadeandalucia.es/agriculturaypesca/ifapa/ria/servlet/FrontController?action=Static&url=coordenadas.jsp"
@@ -40,7 +57,7 @@ getMetaData <- function(provincia = 41, estacion = 5, nombre_estacion = NA){
   p_mas <- regexpr("Más", text2, fixed = TRUE)
   #create data.frame
   meta <- data.frame(provincia = NA, estacion = NA, nombre_estacion = NA,
-                     zona_regable = NA, x = NA, y = NA, latitud = NA, longitud = NA, 
+                     zona_regable = NA, x = NA, y = NA, latitud = NA, longitud = NA,
                      altitud = NA)
   #populate data..frame
   meta[, "provincia"] <- substr(text2, p_prov+attributes(p_prov)$match.length, p_cod-1)
@@ -57,4 +74,9 @@ getMetaData <- function(provincia = 41, estacion = 5, nombre_estacion = NA){
   meta
 }
 
-  
+
+
+
+
+
+
