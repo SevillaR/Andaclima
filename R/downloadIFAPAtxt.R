@@ -1,13 +1,14 @@
 #' Climatic data from "Instituto de Investigacion y Formacion Agraria y Pesquera" ("Institute of Agricultural Research and Training and Fisheries") of Andalusia
 #'
-#' Function to download raw txt file with data from one station
-#' 
-#' @import httr
+#' @description Function to download raw txt file with data from one station
+#'
 #' @param file the name of the file for the download
 #' @param c_province string with the code of the province
 #' @param c_station string with the code of the station
 #' @param start start date for download
 #' @param end end date for download data
+#' @return A data file as it is from unzip the download file from server
+#' @author Manuel Munoz-Marquez \email{manuel.munoz.marquez@@gmail.com}
 #' @example
 #' downloadIFAPAtxt(file = 'IFAPA.txt', c_province = '11', c_station = '5', start = "01-01-2010", end = '31-01-2010')
 #' @export
