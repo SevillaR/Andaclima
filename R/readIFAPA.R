@@ -1,6 +1,6 @@
 #' Climatic data from "Instituto de Investigacion y Formacion Agraria y Pesquera" ("Institute of Agricultural Research and Training and Fisheries") of Andalusia
 #'
-#' @descriptionnFunction to download and read data from one station
+#' @description Function to download and read data from one station
 #'
 #' @param file the name of the file for the download
 #' @param c_province string with the code of the province
@@ -22,10 +22,11 @@ readIFAPA <- function(c_province, c_station, start = '31-01-2000', end = '31-12-
     data <- readLines(filename)
     ## Split first line to get names
     names <- strsplit(data[1], '[ ]+', perl = TRUE)[[1]]
-    ## Remove extranger characters in name
-    names <- gsub(pattern = 'Cá05', replacement = '', names)
     ## Let n be the number of datas in each row
     n <- length(names)
+    ## Remove characters depending on station in name
+    l <- nchar(names[3]) - 3
+    names[3:n] <- sapply(names[3:n], FUN = function(e) substr(e, l, 1000))
     ## Split each line of data but 1 and 2
     data <- strsplit(data[-2:-1], '[ ]+', perl = TRUE)
     ## Drop lines with non different number of data
@@ -36,8 +37,8 @@ readIFAPA <- function(c_province, c_station, start = '31-01-2000', end = '31-12-
     data <- data.frame(t(data))
     names(data) <- names
     ## Convert some columns into correct type
-    data$FECHA <- as.Date(data$FECHA)
-    for (i in 2:n) data[,i] <- as.numeric(data[,i])
+    data$FECHA <- as.Date(data$FECHA, format = '%d-%m-%y')
+    for (i in c(2:3, 5, 7:n)) data[,i] <- as.numeric(as.character(data[,i]))
     ## Add two columns with c_province and c_station
     data$c_province <- as.factor(c_province)
     data$c_station <- as.factor(c_station)
