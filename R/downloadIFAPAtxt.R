@@ -9,8 +9,11 @@
 #' @param end end date for download data
 #' @return A data file as it is from unzip the download file from server
 #' @author Manuel Munoz-Marquez \email{manuel.munoz.marquez@@gmail.com}
-#' @example
-#' downloadIFAPAtxt(file = 'IFAPA.txt', c_province = '11', c_station = '5', start = "01-01-2010", end = '31-01-2010')
+#' @examples
+#'  \dontrun{
+#'  downloadIFAPAtxt(file = 'IFAPA.txt', c_province = '11', c_station = '5',
+#'                   start = "01-01-2010", end = '31-01-2010')
+#'  }
 #' @export
 
 downloadIFAPAtxt <- function(file, c_province, c_station, start = '31-01-2000', end = '31-12-2020') {

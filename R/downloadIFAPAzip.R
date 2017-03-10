@@ -10,10 +10,13 @@
 #' @param end end date for download data
 #' @return A zip file as it is download from server
 #' @author Manuel Munoz-Marquez \email{manuel.munoz.marquez@@gmail.com}
-#' @example
-#' downloadIFAPAzip(file = 'IFAPA.zip', c_province = '11', c_station = '5', start = "01-01-2010", end = '31-01-2010')
+#' @examples  \dontrun{
+#' downloadIFAPAzip(file = 'IFAPA.zip', c_province = '11', c_station = '5',
+#'                  start = "01-01-2010", end = '31-01-2010')
+#' }
 #' @export
 downloadIFAPAzip <- function(file, c_province, c_station, start = '31-01-2000', end = '31-12-2020') {
+    ##  EXAMPLE
     ## Setup url for request
     url = 'https://www.juntadeandalucia.es/agriculturaypesca/ifapa/ria/servlet/FrontController?action=Download&url=descargarDatosEstaciones.jsp'
     ## Send post request to get all variables

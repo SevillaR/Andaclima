@@ -4,7 +4,7 @@
 \alias{getMetaData}
 \title{Get metadata from "Estaciones Agroclimaticas de Andalucia"}
 \usage{
-getMetaData(provincia = 41, estacion = 5, nombre_estacion = NA)
+getMetaData(provincia = NA, estacion = NA, nombre_estacion = NA)
 }
 \arguments{
 \item{provincia}{numerial code of the target province}
@@ -12,6 +12,9 @@ getMetaData(provincia = 41, estacion = 5, nombre_estacion = NA)
 \item{estacion}{numerical code of the target meteorogical station.}
 
 \item{nombre_estacion}{name of the meteorological station (optional). Only used as label.}
+}
+\value{
+onw row data.frame with metadata of the station
 }
 \description{
 This function retrives the metadata of the targeted meteorological station.
@@ -21,7 +24,11 @@ data and codes.
 }
 \examples{
 \dontrun{
-getMetaData(41, 5, "aznalcollar")
+provincia <- c(41,11)
+estacion <- c(5,1)
+nombre_estacion <- c("Aznalcollar", "Basulta")
+getMetaData(provincia, estacion, nombre_estacion)
+getOneMetaData(41, 5, "aznalcollar")
 }
 }
 \author{

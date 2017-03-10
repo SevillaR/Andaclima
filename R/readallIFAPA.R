@@ -2,15 +2,16 @@
 #'
 #' @description Function to download and read data from all stations
 #'
-#' @param file the name of the file for the download
-#' @param c_province string with the code of the province
-#' @param c_station string with the code of the station
+#' ## @param file the name of the file for the download
+#' ## @param c_province string with the code of the province
+#' ## @param c_station string with the code of the station
 #' @param start start date for download
 #' @param end end date for download data
 #' @return A data.frame with the data download after some transformations
 #' @author Manuel Munoz-Marquez \email{manuel.munoz.marquez@@gmail.com}
-#' @example
+#' @examples  \dontrun{
 #' readallIFAPA(start = "01-01-2010", end = '31-01-2010')
+#' }
 #' @export
 
 readallIFAPA <- function(start = '31-01-2000', end = '31-12-2020') {

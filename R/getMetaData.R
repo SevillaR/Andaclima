@@ -4,7 +4,7 @@
 #' @param estacion numerical code of the target meteorogical station.
 #' @param nombre_estacion name of the meteorological station (optional). Only used as label.
 #'
-#' @return
+#' @return onw row data.frame with metadata of the station
 #' @export
 #'
 #' @description This function retrives the metadata of the targeted meteorological station.
@@ -34,14 +34,14 @@ getMetaData <- function(provincia = NA, estacion = NA, nombre_estacion = NA){
 }
 
 getOneMetaData <- function(provincia = NA, estacion = NA, nombre_estacion = NA){
-  require(httr)
-  require(xml2)
+  # require(httr)
+  # require(xml2)
   url = "https://www.juntadeandalucia.es/agriculturaypesca/ifapa/ria/servlet/FrontController?action=Static&url=coordenadas.jsp"
   args <- list(c_provincia =  provincia, c_estacion = estacion)
-  url_check <- GET(url, query = args)
-  doc <- read_html(content(url_check, "text", encoding = "latin1"), encoding = "latin1")
-  tables <- xml_find_all(doc, "//table")
-  text <- xml_text(tables[[1]], trim = TRUE)
+  url_check <- httr::GET(url, query = args)
+  doc    <- xml2::read_html(content(url_check, "text", encoding = "latin1"), encoding = "latin1")
+  tables <- xml2::xml_find_all(doc, "//table")
+  text   <- xml2::xml_text(tables[[1]], trim = TRUE)
   text2 <- gsub("\r\n", replacement = "", text)
   #get starting and end points
   p_prov <- regexpr("Provincia:", text2, fixed = TRUE)
