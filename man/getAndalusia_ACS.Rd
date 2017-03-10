@@ -8,26 +8,28 @@
   getAndalusia_ACS(url = "http://www.juntadeandalucia.es/agriculturaypesca/ifapa/ria/servlet/FrontController?action=Static&url=estaciones2.html",
   encoding = "UTF-8")
 }
+\arguments{
+\item{url}{Page off Agroclimatic Information Network of Andalusia (RIA).}
+
+\item{encoding}{Encoding used by data.frame  return  (defaut: UTF-8)}
+}
+\value{
+a data.frame with name of the station, code of the province and code of the station and URL of de age with the data of the station
+}
 \description{
 The function \code{getAndalusia_ACS} gets the list of meteorological stations of the agro-climatic network of
- the agriculture council of the  Andalusian Administration
+the agriculture council of the  Andalusian Administration
 }
-\details{
-@param url      Page off Agroclimatic Information Network of Andalusia (RIA). Defaut:
-  @param encoding Encoding used by data.frame  return  (defaut: UTF-8)
-
-@return  a data.frame with name of the station, code of the province and code of the station and URL of de
-           Page with the data of the station
-  @author  Francisco.Viciana
-
-@seealso \code{getMetaData}
-
-# @importFrom XML htmlParse getNodeSet
-
-@example
+\examples{
+ \dontrun{
     lista.estaciones <- getAndalusia_ACS()
     head(lista.estaciones[,-4],15)
-
-@export
+}
+}
+\author{
+Francisco.Viciana
+}
+\seealso{
+\code{getMetaData}
 }
 

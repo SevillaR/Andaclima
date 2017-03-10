@@ -2,7 +2,8 @@
 % Please edit documentation in R/readallIFAPA.R
 \name{readallIFAPA}
 \alias{readallIFAPA}
-\title{Climatic data from "Instituto de Investigacion y Formacion Agraria y Pesquera" ("Institute of Agricultural Research and Training and Fisheries") of Andalusia}
+\title{Climatic data from "Instituto de Investigacion y Formacion Agraria y Pesquera"
+ ("Institute of Agricultural Research and Training and Fisheries") of Andalusia}
 \usage{
 readallIFAPA(start = "31-01-2000", end = "31-12-2020")
 }
@@ -16,15 +17,14 @@ A data.frame with the data download after some transformations
 }
 \description{
 Function to download and read data from all stations
-
-## @param file the name of the file for the download
-## @param c_province string with the code of the province
-## @param c_station string with the code of the station
 }
 \examples{
  \dontrun{
+
 readallIFAPA(start = "01-01-2010", end = '31-01-2010')
+
 }
+
 }
 \author{
 Manuel Munoz-Marquez \email{manuel.munoz.marquez@gmail.com}

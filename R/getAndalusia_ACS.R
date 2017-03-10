@@ -17,10 +17,10 @@
 #'
 #' @seealso \code{getMetaData}
 #'
-#' @example
+#' @examples  \dontrun{
 #'     lista.estaciones <- getAndalusia_ACS()
 #'     head(lista.estaciones[,-4],15)
-#'
+#' }
 getAndalusia_ACS   <- function (url = 'http://www.juntadeandalucia.es/agriculturaypesca/ifapa/ria/servlet/FrontController?action=Static&url=estaciones2.html',
                                 encoding='UTF-8')
 {
@@ -31,10 +31,9 @@ getAndalusia_ACS   <- function (url = 'http://www.juntadeandalucia.es/agricultur
    nn <- XML::getNodeSet(oo,'//div[@id="menuIzq"]/div[@ class="seccion"]/a')
 
    provincias <-   data.frame ( provincia =  gsub("[[:space:]]",'',
-                                      sapply ( nn[2:9] , xmlValue, encoding="UTF-8")),
-                                url       = sapply ( nn[2:9] , xmlAttrs ),
+                                      sapply ( nn[2:9] , XML::xmlValue, encoding="UTF-8")),
+                                url       = sapply ( nn[2:9] , XML::xmlAttrs ),
                                 stringsAsFactors = F )
-
 
    weather.station  <- data.frame()
    for (i in 1:length(provincias$provincia)) {
@@ -42,8 +41,8 @@ getAndalusia_ACS   <- function (url = 'http://www.juntadeandalucia.es/agricultur
       url      <-   provincias$url[i]
       XML::htmlParse(url) -> oo
       XML::getNodeSet(oo,'//table[@id="concabecera"]//a') -> nn
-      url.list <- sapply ( nn , xmlAttrs )
-      data.frame ( station.name        =  gsub("^[[:space:]]",'',sapply ( nn, xmlValue, encoding="UTF-8")),
+      url.list <- sapply ( nn , XML::xmlAttrs )
+      data.frame ( station.name        =  gsub("^[[:space:]]",'',sapply ( nn, XML::xmlValue, encoding="UTF-8")),
                    province.code =  as.integer(gsub('^.+c_provincia=([0123456789]+)&.+$','\\1',url.list)),
                    station.code   =  as.integer(gsub('^.+c_estacion=([0123456789]+)*$','\\1',url.list)),
                    url            =  url.list ,

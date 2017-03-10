@@ -1,17 +1,17 @@
 Package: Andaclima
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Download Climatic Series from Andalucia
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
+Author: Francisco J."Viciana, Manuel", Munoz-Marquez y Ignasi Bartomeus
+Author@R:  c(person("Francisco J.",  "Viciana", email= "francisco.viciana@@gmail.es", role='aut'), 
+             person("Manuel", "Munoz-Marquez", email="manuel.munoz.marquez@@gmail.com", role=c('aut')), 
+             person("Ignasi", "Bartomeus", email="nacho.bartomeus@@gmail.com", role='aut'))
+Maintainer: The package maintainer <francisco.viciana@gmail.es>
+Description: The objective is to obtain the daily evolution of the climatic variables along the continuous surface of the map of Andalusia
 Imports:
     httr,
     xml2,
-    XML,
-    RCurl
-License: What license is it under?
-Encoding: UTF-8
+    XML
+License:  GPL (>= 2) 
 LazyData: true
 RoxygenNote: 5.0.1

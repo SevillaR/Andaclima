@@ -39,7 +39,7 @@ getOneMetaData <- function(provincia = NA, estacion = NA, nombre_estacion = NA){
   url = "https://www.juntadeandalucia.es/agriculturaypesca/ifapa/ria/servlet/FrontController?action=Static&url=coordenadas.jsp"
   args <- list(c_provincia =  provincia, c_estacion = estacion)
   url_check <- httr::GET(url, query = args)
-  doc    <- xml2::read_html(content(url_check, "text", encoding = "latin1"), encoding = "latin1")
+  doc    <- xml2::read_html(httr::content(url_check, "text", encoding = "latin1"), encoding = "latin1")
   tables <- xml2::xml_find_all(doc, "//table")
   text   <- xml2::xml_text(tables[[1]], trim = TRUE)
   text2 <- gsub("\r\n", replacement = "", text)
@@ -55,10 +55,12 @@ getOneMetaData <- function(provincia = NA, estacion = NA, nombre_estacion = NA){
   p_alt <- regexpr("Altitud:", text2, fixed = TRUE)
   p_mas <- regexpr("Más", text2, fixed = TRUE)
   #create data.frame
-  meta <- data.frame(provincia = NA, estacion = NA, nombre_estacion = NA,
+  meta <- data.frame(c_provincia = NA ,
+                     provincia = NA, estacion = NA, nombre_estacion = NA,
                      zona_regable = NA, x = NA, y = NA, latitud = NA, longitud = NA,
                      altitud = NA)
   #populate data..frame
+  meta[, "c_provincia"] <- provincia
   meta[, "provincia"] <- substr(text2, p_prov+attributes(p_prov)$match.length, p_cod-1)
   meta[, "estacion"] <- substr(text2, p_cod+attributes(p_cod)$match.length+1, p_zon-1)
   meta[, "nombre_estacion"] <- nombre_estacion
